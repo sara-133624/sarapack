@@ -1,0 +1,26 @@
+{
+    "id": "16216301",
+    "path": "C:/Users/saraa/OneDrive/سطح المكتب/datapre/dataprep/tests/testthat/test-identify_duplicates.R",
+    "project_path": "tests/testthat/test-identify_duplicates.R",
+    "type": "r_source",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1734683789604.0,
+    "source_on_save": false,
+    "relative_order": 24,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "5,0",
+        "scrollLine": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1734633558,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1734633558,
+    "read_only": false,
+    "read_only_alternatives": []
+}

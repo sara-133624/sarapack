@@ -1,0 +1,26 @@
+{
+    "id": "11C26A66",
+    "path": "C:/Users/saraa/OneDrive/سطح المكتب/datapre/dataprep/tests/testthat/test-detect_outliers.R",
+    "project_path": "tests/testthat/test-detect_outliers.R",
+    "type": "r_source",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1734683796634.0,
+    "source_on_save": false,
+    "relative_order": 30,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "24,0",
+        "scrollLine": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1734679397,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1734679397,
+    "read_only": false,
+    "read_only_alternatives": []
+}

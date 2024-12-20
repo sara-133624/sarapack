@@ -1,0 +1,396 @@
+---
+title: "Untitled"
+author: '....'
+date: "`r Sys.Date()`"
+output: html_document
+---
+######
+
+```{r}
+#' Mean Imputation
+#'
+#' This function replaces missing values in a column with the mean of that column.
+#' @param data A data frame containing the data.
+#' @param col_name The name of the column (as a string) to perform mean imputation on.
+#' @return A data frame with missing values in the specified column replaced by the mean.
+#' @examples
+#' data <- data.frame(x = c(1, 2, NA, 4, 5))
+#' mean_imputation(data, "x")
+mean_imputation <- function(data, col_name) {
+  data[[col_name]][is.na(data[[col_name]])] <- mean(data[[col_name]], na.rm = TRUE)
+  return(data)
+}
+
+```
+
+
+
+
+
+```{r}
+#' Multiple Imputation
+#'
+#' This function performs multiple imputation on a data frame using the `mice` package.
+#' @param data A data frame containing the data with missing values.
+#' @return A data frame with missing values imputed using multiple imputation.
+#' @examples
+#' data <- data.frame(x = c(1, 2, NA, 4, 5), y = c(NA, 3, 4, NA, 6))
+#' multiple_imputation(data)
+multiple_imputation <- function(data) {
+  if (!requireNamespace("mice", quietly = TRUE)) {
+    install.packages("mice")
+  }
+  library(mice)
+  imputed_data <- mice(data, m = 5, method = "pmm", maxit = 50, seed = 500)
+  complete_data <- complete(imputed_data)
+  return(complete_data)
+}
+```
+
+
+
+
+
+```{r}
+#' Z-Score Method for Detecting Outliers
+#'
+#' This function identifies outliers based on the Z-Score method.
+#' Outliers are defined as values with a Z-Score greater than the threshold.
+#'
+#' @param data A numeric vector containing the data.
+#' @param threshold The Z-Score threshold for detecting outliers. Default is 3.
+#' @return A list containing the outliers and the cleaned data.
+#' @examples
+#' z_score_outliers(c(10, 12, 15, 100, 13), threshold = 2)
+z_score_outliers <- function(data, threshold = 3) {
+  z_scores <- (data - mean(data, na.rm = TRUE)) / sd(data, na.rm = TRUE)
+  outliers <- data[abs(z_scores) > threshold]
+  cleaned_data <- data[abs(z_scores) <= threshold]
+  return(list(outliers = outliers, cleaned_data = cleaned_data))
+}
+
+```
+
+
+```{r}
+
+#' IQR Method for Detecting Outliers
+#'
+#' This function identifies outliers based on the Interquartile Range (IQR) method.
+#' Outliers are defined as values outside the range [Q1 - 1.5*IQR, Q3 + 1.5*IQR].
+#'
+#' @param data A numeric vector containing the data.
+#' @return A list containing the outliers and the cleaned data.
+#' @examples
+#' iqr_outliers(c(10, 12, 15, 100, 13))
+iqr_outliers <- function(data) {
+  Q1 <- quantile(data, 0.25, na.rm = TRUE)
+  Q3 <- quantile(data, 0.75, na.rm = TRUE)
+  IQR <- Q3 - Q1
+  lower_bound <- Q1 - 1.5 * IQR
+  upper_bound <- Q3 + 1.5 * IQR
+  outliers <- data[data < lower_bound | data > upper_bound]
+  cleaned_data <- data[data >= lower_bound & data <= upper_bound]
+  return(list(outliers = outliers, cleaned_data = cleaned_data))
+}
+
+```
+
+
+```{r}
+#' Standardization Function
+#'
+#' This function standardizes a numeric vector using the formula:
+#' z = (x - mean(x)) / sd(x)
+#'
+#' @param data A numeric vector to be standardized.
+#' @return A numeric vector with standardized values.
+#' @examples
+#' standardize(c(10, 20, 30, 40, 50))
+standardize <- function(data) {
+  if (!is.numeric(data)) stop("Input data must be numeric")
+  standardized_data <- (data - mean(data, na.rm = TRUE)) / sd(data, na.rm = TRUE)
+  return(standardized_data)
+}
+
+```
+
+
+```{r}
+#' Normalization Function
+#'
+#' This function normalizes a numeric vector to a range of [0, 1] using the formula:
+#' x' = (x - min(x)) / (max(x) - min(x))
+#'
+#' @param data A numeric vector to be normalized.
+#' @return A numeric vector with normalized values in the range [0, 1].
+#' @examples
+#' normalize(c(10, 20, 30, 40, 50))
+normalize <- function(data) {
+  if (!is.numeric(data)) stop("Input data must be numeric")
+  normalized_data <- (data - min(data, na.rm = TRUE)) / (max(data, na.rm = TRUE) - min(data, na.rm = TRUE))
+  return(normalized_data)
+}
+```
+
+
+
+
+
+```{r}
+#' One-Hot Encoding Function
+#'
+#' This function performs one-hot encoding on a categorical vector, converting it to binary columns.
+#' @param data A data frame containing the categorical variable.
+#' @param col_name The name of the column (as a string) to perform one-hot encoding on.
+#' @return A data frame with one-hot encoded columns replacing the original column.
+#' @examples
+#' one_hot_encode(data.frame(category = c("A", "B", "A", "C")), "category")
+one_hot_encode <- function(data, col_name) {
+  if (!is.factor(data[[col_name]]) && !is.character(data[[col_name]])) {
+    stop("The column must be a factor or character type for one-hot encoding.")
+  }
+  encoded_data <- model.matrix(~ . - 1, data = data.frame(data[[col_name]]))
+  colnames(encoded_data) <- paste(col_name, levels(data[[col_name]]), sep = "_")
+  data <- cbind(data, encoded_data)
+  data[[col_name]] <- NULL  # Remove the original column
+  return(data)
+}
+
+```
+
+
+
+
+
+```{r}
+
+#' Ordinal Encoding Function
+#'
+#' This function performs ordinal encoding on a categorical vector by mapping categories to integers.
+#' @param data A data frame containing the categorical variable.
+#' @param col_name The name of the column (as a string) to perform ordinal encoding on.
+#' @return A data frame with ordinal encoded values replacing the original column.
+#' @examples
+#' ordinal_encode(data.frame(category = c("Low", "Medium", "High")), "category")
+ordinal_encode <- function(data, col_name) {
+  if (!is.factor(data[[col_name]]) && !is.character(data[[col_name]])) {
+    stop("The column must be a factor or character type for ordinal encoding.")
+  }
+  data[[col_name]] <- as.numeric(factor(data[[col_name]], levels = unique(data[[col_name]])))
+  return(data)
+}
+
+```
+
+
+
+
+
+```{r}
+#' Identify Duplicates
+#'
+#' This function identifies duplicate rows in a data frame.
+#' @param data A data frame to check for duplicates.
+#' @return A logical vector indicating whether each row is a duplicate (TRUE for duplicates).
+#' @examples
+#' identify_duplicates(data.frame(a = c(1, 2, 2), b = c(3, 4, 4)))
+identify_duplicates <- function(data) {
+  if (!is.data.frame(data)) stop("Input data must be a data frame.")
+  return(duplicated(data))
+}
+
+```
+
+
+
+
+```{r}
+
+#' Remove Duplicates
+#'
+#' This function removes duplicate rows from a data frame.
+#' @param data A data frame to remove duplicates from.
+#' @return A data frame with duplicates removed.
+#' @examples
+#' remove_duplicates(data.frame(a = c(1, 2, 2), b = c(3, 4, 4)))
+remove_duplicates <- function(data) {
+  if (!is.data.frame(data)) stop("Input data must be a data frame.")
+  return(data[!duplicated(data), ])
+}
+
+```
+
+
+
+
+
+```{r}
+
+#' Retain Duplicates
+#'
+#' This function retains only the duplicate rows in a data frame.
+#' @param data A data frame to extract duplicates from.
+#' @return A data frame containing only duplicate rows.
+#' @examples
+#' retain_duplicates(data.frame(a = c(1, 2, 2), b = c(3, 4, 4)))
+retain_duplicates <- function(data) {
+  if (!is.data.frame(data)) stop("Input data must be a data frame.")
+  return(data[duplicated(data) | duplicated(data, fromLast = TRUE), ])
+}
+
+
+
+```
+
+
+
+
+```{r}
+#' Variance Inflation Factor (VIF) Calculation
+#'
+#' This function calculates the VIF for each predictor variable in a linear model.
+#' @param model A fitted linear model (object of class `lm`).
+#' @return A named vector of VIF values for each predictor variable.
+#' @examples
+#' model <- lm(mpg ~ disp + hp + wt, data = mtcars)
+#' calculate_vif(model)
+calculate_vif <- function(model) {
+  if (!inherits(model, "lm")) stop("The input must be a linear model (class 'lm').")
+  
+  vif_values <- NULL
+  for (i in names(coef(model))[-1]) {  # Skip the intercept
+    formula_i <- as.formula(paste(i, "~ ."))
+    model_i <- lm(formula_i, data = model$model)
+    r_squared <- summary(model_i)$r.squared
+    vif_values[i] <- 1 / (1 - r_squared)
+  }
+  return(vif_values)
+}
+
+
+```
+
+
+
+
+
+```{r}
+
+#' Principal Component Analysis (PCA)
+#'
+#' This function performs PCA on a numeric matrix or data frame and returns the principal components.
+#' @param data A numeric matrix or data frame.
+#' @return A list containing the principal components, explained variance, and loadings.
+#' @examples
+#' perform_pca(mtcars[, c("disp", "hp", "wt")])
+perform_pca <- function(data) {
+  if (!is.numeric(as.matrix(data))) stop("The input data must be numeric.")
+  
+  pca_result <- prcomp(data, scale. = TRUE)
+  result <- list(
+    principal_components = pca_result$x,
+    explained_variance = summary(pca_result)$importance[2, ],
+    loadings = pca_result$rotation
+  )
+  return(result)
+
+```
+
+
+
+
+```{r}
+#' SMOTE (Synthetic Minority Oversampling Technique)
+#'
+#' This function performs SMOTE to balance the dataset by oversampling the minority class.
+#' @param data A data frame containing the features and target variable.
+#' @param target The name of the target variable (as a string).
+#' @param k The number of nearest neighbors for synthetic data generation. Default is 5.
+#' @return A balanced data frame with synthetic samples added.
+#' @examples
+#' smote(data.frame(x1 = c(1, 2, 3), x2 = c(1, 1, 2), y = c(0, 1, 1)), "y")
+smote <- function(data, target, k = 5) {
+  if (!requireNamespace("DMwR", quietly = TRUE)) {
+    install.packages("DMwR")
+  }
+  library(DMwR)
+  
+  # Apply SMOTE
+  balanced_data <- SMOTE(as.formula(paste(target, "~ .")), data, perc.over = 200, perc.under = 200, k = k)
+  return(balanced_data)
+}
+
+
+
+```
+
+```{r}
+#' Weighted Loss Function
+#'
+#' This function calculates a weighted loss for a classification problem.
+#' @param y_true A vector of true class labels.
+#' @param y_pred A vector of predicted probabilities for the positive class.
+#' @param class_weights A vector of weights for each class.
+#' @return The weighted loss value.
+#' @examples
+#' weighted_loss(c(1, 0, 1), c(0.9, 0.2, 0.7), c(0.3, 0.7))
+weighted_loss <- function(y_true, y_pred, class_weights) {
+  if (length(y_true) != length(y_pred)) stop("y_true and y_pred must have the same length.")
+  if (length(unique(y_true)) != length(class_weights)) stop("Class weights must match the number of unique classes.")
+  
+  loss <- -sum(class_weights[y_true + 1] * (y_true * log(y_pred) + (1 - y_true) * log(1 - y_pred)))
+  return(loss)
+}
+
+
+
+
+```
+
+
+
+```{r}
+#' Detect Outliers for Typos
+#'
+#' This function identifies potential typos in numeric data using the Z-Score method.
+#' @param data A numeric vector to check for outliers.
+#' @param threshold The Z-Score threshold for identifying typos. Default is 3.
+#' @return A list containing the indices of potential typos and a cleaned vector.
+#' @examples
+#' detect_outliers(c(10, 12, 15, 100, 13), threshold = 2)
+detect_outliers <- function(data, threshold = 3) {
+  if (!is.numeric(data)) stop("Input data must be numeric.")
+  
+  z_scores <- (data - mean(data, na.rm = TRUE)) / sd(data, na.rm = TRUE)
+  outliers <- which(abs(z_scores) > threshold)
+  cleaned_data <- data
+  cleaned_data[outliers] <- NA  # Replace outliers with NA
+  return(list(outliers = outliers, cleaned_data = cleaned_data))
+}
+
+```
+
+
+```{r}
+#' Range Check for Data Validation
+#'
+#' This function validates if numeric data falls within a specified range.
+#' @param data A numeric vector to check for range violations.
+#' @param min_val The minimum allowed value.
+#' @param max_val The maximum allowed value.
+#' @return A list containing the indices of violations and a cleaned vector.
+#' @examples
+#' range_check(c(5, 10, 20, 50), min_val = 10, max_val = 30)
+range_check <- function(data, min_val, max_val) {
+  if (!is.numeric(data)) stop("Input data must be numeric.")
+  
+  violations <- which(data < min_val | data > max_val)
+  cleaned_data <- data
+  cleaned_data[violations] <- NA  # Replace violations with NA
+  return(list(violations = violations, cleaned_data = cleaned_data))
+}
+
+```
+
+

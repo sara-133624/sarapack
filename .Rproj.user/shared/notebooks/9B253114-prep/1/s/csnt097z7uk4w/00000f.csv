@@ -1,0 +1,87 @@
+"0","library(usethis)"
+"0","use_r(""mean_imputation"")"
+"2","[32m✔[39m Setting active project to [34m""C:/Users/saraa/OneDrive/سطح المكتب/datapre/dataprep""[39m.
+"
+"2","[31m☐[39m Modify ]8;;file://C:/Users/saraa/OneDrive/سطح المكتب/datapre/dataprep/R/mean_imputation.R[34mR/mean_imputation.R[39m]8;;.
+"
+"0","use_r(""iqr_outliers"")"
+"2","[31m☐[39m Modify ]8;;file://C:/Users/saraa/OneDrive/سطح المكتب/datapre/dataprep/R/iqr_outliers.R[34mR/iqr_outliers.R[39m]8;;.
+"
+"0","use_r(""standardize"")"
+"2","[31m☐[39m Modify ]8;;file://C:/Users/saraa/OneDrive/سطح المكتب/datapre/dataprep/R/standardize.R[34mR/standardize.R[39m]8;;.
+"
+"0","use_r(""normalize"")"
+"2","[31m☐[39m Modify ]8;;file://C:/Users/saraa/OneDrive/سطح المكتب/datapre/dataprep/R/normalize.R[34mR/normalize.R[39m]8;;.
+"
+"0","use_r(""one_hot_encode"")"
+"2","[31m☐[39m Modify ]8;;file://C:/Users/saraa/OneDrive/سطح المكتب/datapre/dataprep/R/one_hot_encode.R[34mR/one_hot_encode.R[39m]8;;.
+"
+"0","use_r(""ordinal_encode"")"
+"2","[31m☐[39m Modify ]8;;file://C:/Users/saraa/OneDrive/سطح المكتب/datapre/dataprep/R/ordinal_encode.R[34mR/ordinal_encode.R[39m]8;;.
+"
+"0","use_r(""identify_duplicates"")"
+"2","[31m☐[39m Modify ]8;;file://C:/Users/saraa/OneDrive/سطح المكتب/datapre/dataprep/R/identify_duplicates.R[34mR/identify_duplicates.R[39m]8;;.
+"
+"0","use_r(""remove_duplicates"")"
+"2","[31m☐[39m Modify ]8;;file://C:/Users/saraa/OneDrive/سطح المكتب/datapre/dataprep/R/remove_duplicates.R[34mR/remove_duplicates.R[39m]8;;.
+"
+"0","use_r(""retain_duplicates"")"
+"2","[31m☐[39m Modify ]8;;file://C:/Users/saraa/OneDrive/سطح المكتب/datapre/dataprep/R/retain_duplicates.R[34mR/retain_duplicates.R[39m]8;;.
+"
+"0","use_r(""calculate_vif"")"
+"2","[31m☐[39m Modify ]8;;file://C:/Users/saraa/OneDrive/سطح المكتب/datapre/dataprep/R/calculate_vif.R[34mR/calculate_vif.R[39m]8;;.
+"
+"0","use_r(""perform_pca"")"
+"2","[31m☐[39m Modify ]8;;file://C:/Users/saraa/OneDrive/سطح المكتب/datapre/dataprep/R/perform_pca.R[34mR/perform_pca.R[39m]8;;.
+"
+"0","use_r(""weighted_loss"")"
+"2","[31m☐[39m Modify ]8;;file://C:/Users/saraa/OneDrive/سطح المكتب/datapre/dataprep/R/weighted_loss.R[34mR/weighted_loss.R[39m]8;;.
+"
+"0","use_r(""detect_outliers"")"
+"2","[31m☐[39m Modify ]8;;file://C:/Users/saraa/OneDrive/سطح المكتب/datapre/dataprep/R/detect_outliers.R[34mR/detect_outliers.R[39m]8;;.
+"
+"0","use_r(""range_check"")"
+"2","[31m☐[39m Modify ]8;;file://C:/Users/saraa/OneDrive/سطح المكتب/datapre/dataprep/R/range_check.R[34mR/range_check.R[39m]8;;.
+"
+"0","use_test(""mean_imputation"")"
+"2","[31m☐[39m Modify ]8;;file://C:/Users/saraa/OneDrive/سطح المكتب/datapre/dataprep/tests/testthat/test-mean_imputation.R[34mtests/testthat/test-mean_imputation.R[39m]8;;.
+"
+"0","use_test(""iqr_outliers"")"
+"2","[31m☐[39m Modify ]8;;file://C:/Users/saraa/OneDrive/سطح المكتب/datapre/dataprep/tests/testthat/test-iqr_outliers.R[34mtests/testthat/test-iqr_outliers.R[39m]8;;.
+"
+"0","use_test(""standardize"")"
+"2","[31m☐[39m Modify ]8;;file://C:/Users/saraa/OneDrive/سطح المكتب/datapre/dataprep/tests/testthat/test-standardize.R[34mtests/testthat/test-standardize.R[39m]8;;.
+"
+"0","use_test(""normalize"")"
+"2","[31m☐[39m Modify ]8;;file://C:/Users/saraa/OneDrive/سطح المكتب/datapre/dataprep/tests/testthat/test-normalize.R[34mtests/testthat/test-normalize.R[39m]8;;.
+"
+"0","use_test(""one_hot_encode"")"
+"2","[31m☐[39m Modify ]8;;file://C:/Users/saraa/OneDrive/سطح المكتب/datapre/dataprep/tests/testthat/test-one_hot_encode.R[34mtests/testthat/test-one_hot_encode.R[39m]8;;.
+"
+"0","use_test(""ordinal_encode"")"
+"2","[31m☐[39m Modify ]8;;file://C:/Users/saraa/OneDrive/سطح المكتب/datapre/dataprep/tests/testthat/test-ordinal_encode.R[34mtests/testthat/test-ordinal_encode.R[39m]8;;.
+"
+"0","use_test(""identify_duplicates"")"
+"2","[31m☐[39m Modify ]8;;file://C:/Users/saraa/OneDrive/سطح المكتب/datapre/dataprep/tests/testthat/test-identify_duplicates.R[34mtests/testthat/test-identify_duplicates.R[39m]8;;.
+"
+"0","use_test(""remove_duplicates"")"
+"2","[31m☐[39m Modify ]8;;file://C:/Users/saraa/OneDrive/سطح المكتب/datapre/dataprep/tests/testthat/test-remove_duplicates.R[34mtests/testthat/test-remove_duplicates.R[39m]8;;.
+"
+"0","use_test(""retain_duplicates"")"
+"2","[31m☐[39m Modify ]8;;file://C:/Users/saraa/OneDrive/سطح المكتب/datapre/dataprep/tests/testthat/test-retain_duplicates.R[34mtests/testthat/test-retain_duplicates.R[39m]8;;.
+"
+"0","use_test(""calculate_vif"")"
+"2","[31m☐[39m Modify ]8;;file://C:/Users/saraa/OneDrive/سطح المكتب/datapre/dataprep/tests/testthat/test-calculate_vif.R[34mtests/testthat/test-calculate_vif.R[39m]8;;.
+"
+"0","use_test(""perform_pca"")"
+"2","[31m☐[39m Modify ]8;;file://C:/Users/saraa/OneDrive/سطح المكتب/datapre/dataprep/tests/testthat/test-perform_pca.R[34mtests/testthat/test-perform_pca.R[39m]8;;.
+"
+"0","use_test(""weighted_loss"")"
+"2","[31m☐[39m Modify ]8;;file://C:/Users/saraa/OneDrive/سطح المكتب/datapre/dataprep/tests/testthat/test-weighted_loss.R[34mtests/testthat/test-weighted_loss.R[39m]8;;.
+"
+"0","use_test(""detect_outliers"")"
+"2","[31m☐[39m Modify ]8;;file://C:/Users/saraa/OneDrive/سطح المكتب/datapre/dataprep/tests/testthat/test-detect_outliers.R[34mtests/testthat/test-detect_outliers.R[39m]8;;.
+"
+"0","use_test(""range_check"")"
+"2","[31m☐[39m Modify ]8;;file://C:/Users/saraa/OneDrive/سطح المكتب/datapre/dataprep/tests/testthat/test-range_check.R[34mtests/testthat/test-range_check.R[39m]8;;.
+"

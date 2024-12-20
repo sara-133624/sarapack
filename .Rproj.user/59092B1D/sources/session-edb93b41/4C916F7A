@@ -1,0 +1,26 @@
+{
+    "id": "4C916F7A",
+    "path": "C:/Users/saraa/OneDrive/سطح المكتب/datapre/dataprep/tests/testthat/test-mean_imputation.R",
+    "project_path": "tests/testthat/test-mean_imputation.R",
+    "type": "r_source",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1734683783606.0,
+    "source_on_save": false,
+    "relative_order": 18,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "5,0",
+        "scrollLine": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1734633545,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1734633545,
+    "read_only": false,
+    "read_only_alternatives": []
+}
